@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Convert an xml string into a simple text format
+ *
+ * @param $text
+ * @return bool|string
+ */
 function xmlToCSV($text)
 {
     if(! isValidXml($text)) {
@@ -16,6 +22,12 @@ function xmlToCSV($text)
     return $output;
 }
 
+/**
+ * Verify if xml string sent is valid
+ *
+ * @param $text
+ * @return bool
+ */
 function isValidXml($text)
 {
     $text = trim($text);
@@ -31,6 +43,12 @@ function isValidXml($text)
     return empty($errors);
 }
 
+/**
+ * Get required values for each tour in the xml string
+ *
+ * @param $item
+ * @return array
+ */
 function getRowData($item)
 {
     $output = array();
@@ -43,22 +61,46 @@ function getRowData($item)
     return $output;
 }
 
+/**
+ * get tour title
+ *
+ * @param $title
+ * @return string
+ */
 function getTourTitle($title)
 {
     $title = (string) $title;
     return html_entity_decode($title, ENT_QUOTES, 'UTF-8');
 }
 
+/**
+ * get tour code
+ *
+ * @param $code
+ * @return string
+ */
 function getTourCode($code)
 {
     return (string) $code;
 }
 
+/**
+ * Get tour duration
+ *
+ * @param $duration
+ * @return int
+ */
 function getTourDuration($duration)
 {
     return (int) $duration;
 }
 
+/**
+ * Get a simplified verion of inclusions
+ *
+ * @param $inclusions
+ * @return mixed|string
+ */
 function getTourInclusions($inclusions)
 {
     $inclusions = str_replace('&nbsp;', ' ', strip_tags((string) $inclusions));
@@ -68,6 +110,12 @@ function getTourInclusions($inclusions)
     return $inclusions;
 }
 
+/**
+ * Get tour minimum price
+ *
+ * @param $item
+ * @return mixed
+ */
 function getTourMinPrice($item)
 {
     $itemsToCompare = array();
@@ -81,6 +129,13 @@ function getTourMinPrice($item)
     return min($itemsToCompare);
 }
 
+/**
+ * Get final departure price based on discount
+ *
+ * @param $price
+ * @param null $discount
+ * @return string
+ */
 function getDeparturePrice($price, $discount = null)
 {
     if(!empty($discount)) {
