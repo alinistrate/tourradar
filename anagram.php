@@ -9,11 +9,13 @@ function isAnagram($string1, $string2)
     return (count_chars(sanatizeString($string1), 1) == count_chars(sanatizeString($string2), 1));
 }
 
-function invalidInputs($string1, $string2) {
+function invalidInputs($string1, $string2)
+{
     return (!is_string($string1) || !is_string($string2));
 }
 
-function sanatizeString($string) {
+function sanatizeString($string)
+{
     return str_replace(" ", "", strtolower($string));
 }
 
